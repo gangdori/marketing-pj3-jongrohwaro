@@ -1,0 +1,1340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Jongrohwaro BBQ — Menu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg-0:#0a0807;
+    --bg-1:#14100e;
+    --line:rgba(255,255,255,.10);
+    --line-soft:rgba(255,255,255,.05);
+    --ink:#f6efe4;
+    --ink-2:#d6cdbe;
+    --ink-3:#8a8276;
+    --ink-4:#5d564c;
+    --gold:#e9b865;
+    --premium-ink:#1a1410;
+    --c-red:#e44b3a;
+    --c-orange:#f08a2c;
+    --c-yellow:#efc63a;
+    --c-green:#6cba47;
+    --c-blue:#3aa1e6;
+    --c-purple:#a366c9;
+  }
+
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  html{background:#000;}
+  body{
+    font-family:'Inter','Noto Sans KR',system-ui,sans-serif;
+    color:var(--ink);
+    background:#000;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .device{
+    max-width:440px;
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--bg-0);
+    position:relative;
+    overflow:hidden;
+    padding-bottom:84px; /* space for fixed bottom bar */
+  }
+  @media (min-width:720px){
+    body{
+      background:radial-gradient(60% 60% at 50% 0%,#1a1410,#050403 70%);
+      padding:24px 0;
+    }
+    .device{
+      border-radius:32px;
+      border:1px solid rgba(255,255,255,.06);
+      max-height:calc(100vh - 48px);
+      min-height:760px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      scrollbar-width:thin;
+    }
+  }
+
+  /* ===== Top bar ===== */
+  .topbar{
+    position:sticky;
+    top:0;
+    z-index:30;
+    padding:14px 18px 12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    background:rgba(10,8,7,.92);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{
+    display:flex;flex-direction:column;gap:3px;line-height:1;
+  }
+  .brand .ko{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.04em;
+    color:var(--ink);
+  }
+  .brand .en{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+    letter-spacing:.16em;
+    color:var(--gold);
+  }
+  .open-pill{
+    margin-left:auto;
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:11.5px;font-weight:800;
+    letter-spacing:.08em;
+    color:#7ed957;
+    padding:6px 12px;
+    border-radius:999px;
+    background:rgba(126,217,87,.12);
+    border:1px solid rgba(126,217,87,.35);
+    text-transform:uppercase;
+  }
+  .open-pill .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#7ed957;box-shadow:0 0 10px #7ed957;
+    position:relative;
+  }
+  .open-pill .dot::after{
+    content:'';
+    position:absolute;inset:-4px;
+    border-radius:50%;
+    border:2px solid currentColor;
+    opacity:0;
+    animation:pillPulse 2s ease-out infinite;
+  }
+  @keyframes pillPulse{
+    0%{transform:scale(.6);opacity:.7;}
+    100%{transform:scale(1.8);opacity:0;}
+  }
+  .open-pill.state-closing{ color:#f5cf86; background:rgba(233,184,101,.14); border-color:rgba(233,184,101,.4); }
+  .open-pill.state-closing .dot{ background:#f5cf86; box-shadow:0 0 10px #f5cf86; }
+  .open-pill.state-opening{ color:#7fc4ee; background:rgba(58,161,230,.14); border-color:rgba(58,161,230,.4); }
+  .open-pill.state-opening .dot{ background:#7fc4ee; box-shadow:0 0 10px #7fc4ee; }
+  .open-pill.state-closed{ color:#ee9988; background:rgba(228,75,58,.14); border-color:rgba(228,75,58,.4); }
+  .open-pill.state-closed .dot{ background:#ee9988; box-shadow:0 0 10px #ee9988; animation:none; }
+  .open-pill.state-closed .dot::after{ animation:none; opacity:0; }
+
+  /* ===== Status banner (under top bar) ===== */
+  .status-banner{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 18px;
+    border-bottom:1px solid var(--line);
+    background:rgba(10,8,7,.92);
+    backdrop-filter:blur(14px);
+    position:sticky;
+    top:60px;
+    z-index:26;
+  }
+  .status-banner .sb-dot{
+    width:9px;height:9px;border-radius:50%;flex:0 0 auto;
+    position:relative;
+  }
+  .status-banner .sb-dot::after{
+    content:'';
+    position:absolute;inset:-4px;border-radius:50%;
+    border:2px solid currentColor;opacity:0;
+    animation:pillPulse 2s ease-out infinite;
+  }
+  .status-banner .sb-text{flex:1;min-width:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;}
+  .status-banner .sb-state{
+    font-family:'Inter',sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+  }
+  .status-banner .sb-detail{
+    font-size:12px;
+    color:var(--ink-3);
+  }
+  .status-banner.state-open{
+    background:linear-gradient(90deg,rgba(126,217,87,.12),rgba(10,8,7,.92) 70%);
+    border-bottom-color:rgba(126,217,87,.25);
+    color:#7ed957;
+  }
+  .status-banner.state-open .sb-dot{ background:#7ed957; box-shadow:0 0 10px #7ed957; }
+  .status-banner.state-open .sb-state{ color:#a6e889; }
+
+  .status-banner.state-closing{
+    background:linear-gradient(90deg,rgba(233,184,101,.14),rgba(10,8,7,.92) 70%);
+    border-bottom-color:rgba(233,184,101,.3);
+    color:var(--gold);
+  }
+  .status-banner.state-closing .sb-dot{ background:var(--gold); box-shadow:0 0 10px var(--gold); }
+  .status-banner.state-closing .sb-state{ color:#f5cf86; }
+
+  .status-banner.state-opening{
+    background:linear-gradient(90deg,rgba(58,161,230,.12),rgba(10,8,7,.92) 70%);
+    border-bottom-color:rgba(58,161,230,.3);
+    color:#7fc4ee;
+  }
+  .status-banner.state-opening .sb-dot{ background:#7fc4ee; box-shadow:0 0 10px #7fc4ee; }
+  .status-banner.state-opening .sb-state{ color:#9bd0f3; }
+
+  .status-banner.state-closed{
+    background:linear-gradient(90deg,rgba(228,75,58,.12),rgba(10,8,7,.92) 70%);
+    border-bottom-color:rgba(228,75,58,.3);
+    color:#ee9988;
+  }
+  .status-banner.state-closed .sb-dot{ background:#ee9988; box-shadow:0 0 10px #ee9988; animation:none; }
+  .status-banner.state-closed .sb-dot::after{ animation:none; opacity:0; }
+  .status-banner.state-closed .sb-state{ color:#ee9988; }
+
+  /* ===== Banchan promo strip ===== */
+  .banchan-promo{
+    position:relative;
+    padding:16px 18px 14px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(120% 80% at 100% 0%, rgba(233,184,101,.10), transparent 60%),
+      linear-gradient(180deg, #110d0a, #0a0807);
+  }
+  .banchan-promo .bp-eyebrow{
+    font-family:'Inter',sans-serif;
+    font-size:9.5px;letter-spacing:.22em;
+    color:var(--gold);
+    text-transform:uppercase;
+    font-weight:700;
+    display:flex;align-items:center;gap:8px;
+    margin-bottom:8px;
+  }
+  .banchan-promo .bp-eyebrow::before,
+  .banchan-promo .bp-eyebrow::after{
+    content:'';flex:0 0 14px;height:1px;background:linear-gradient(90deg,transparent,rgba(233,184,101,.5),transparent);
+  }
+  .banchan-promo .bp-eyebrow::before{flex:0 0 14px;}
+  .banchan-promo .bp-eyebrow::after{flex:1;}
+  .banchan-promo .bp-headline{
+    font-family:'Noto Serif KR',serif;
+    font-weight:600;
+    font-size:15px;
+    line-height:1.45;
+    color:var(--ink-1);
+    letter-spacing:-.01em;
+    margin:0 0 4px;
+  }
+  .banchan-promo .bp-sub{
+    font-family:'Noto Serif KR',serif;
+    font-weight:700;
+    font-size:13.5px;
+    line-height:1.35;
+    color:var(--gold);
+    letter-spacing:-.015em;
+    margin:0 0 12px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .banchan-promo .bp-sub .num{
+    color:#fff5dd;
+    font-size:17px;
+    font-weight:800;
+    margin:0 2px;
+  }
+  .banchan-promo .bp-sub .unlimited{
+    position:relative;
+    display:inline-block;
+    font-style:italic;
+    font-weight:800;
+    background:linear-gradient(90deg,#ffe5a8 0%,#ffd166 25%,#fff7d6 50%,#ffd166 75%,#ffe5a8 100%);
+    background-size:200% 100%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    color:transparent;
+    animation:shimmerText 3.4s linear infinite;
+    padding:0 1px;
+    letter-spacing:.005em;
+  }
+  .banchan-promo .bp-sub .unlimited::before{
+    content:'∞';
+    display:inline-block;
+    margin-right:5px;
+    font-style:normal;
+    -webkit-text-fill-color:#ffd166;
+    color:#ffd166;
+    text-shadow:0 0 10px rgba(255,209,102,.55);
+    transform:translateY(.5px);
+    animation:infinitySpin 2.6s ease-in-out infinite;
+  }
+  .banchan-promo .bp-sub .unlimited::after{
+    content:'';
+    position:absolute;
+    left:-2px;right:-2px;bottom:-2px;
+    height:1.5px;
+    background:linear-gradient(90deg,transparent,#ffd166,transparent);
+    opacity:.7;
+    animation:underlineSweep 3.4s linear infinite;
+  }
+  @keyframes shimmerText{
+    0%{background-position:200% 0;}
+    100%{background-position:-200% 0;}
+  }
+  @keyframes infinitySpin{
+    0%,100%{transform:translateY(.5px) rotate(0deg);}
+    50%{transform:translateY(.5px) rotate(180deg);}
+  }
+  @keyframes underlineSweep{
+    0%{transform:translateX(-100%);}
+    100%{transform:translateX(100%);}
+  }
+  .banchan-promo .bp-thumbs{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:7px;
+  }
+  .banchan-promo .bp-thumb{
+    position:relative;
+    aspect-ratio: 4/3;
+    border-radius:8px;
+    overflow:hidden;
+    border:1px solid rgba(233,184,101,.25);
+    background:#0a0807;
+    cursor:pointer;
+    transition:transform .2s ease, border-color .2s ease;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .banchan-promo .bp-thumb:active{ transform:scale(.97); border-color:var(--gold); }
+  .banchan-promo .bp-thumb img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .banchan-promo .bp-thumb::after{
+    content:'';
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(0,0,0,.35));
+    pointer-events:none;
+  }
+  .banchan-promo .bp-thumb .bp-zoom{
+    position:absolute;right:5px;bottom:5px;
+    width:18px;height:18px;border-radius:50%;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(4px);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--gold);
+  }
+  .banchan-promo .bp-thumb .bp-zoom svg{width:10px;height:10px;}
+
+  /* ===== Banchan lightbox ===== */
+  .bp-lightbox{
+    position:fixed;inset:0;z-index:200;
+    background:rgba(0,0,0,.92);
+    display:none;
+    align-items:center;justify-content:center;
+    padding:20px;
+    animation:fadeIn .2s ease;
+  }
+  .bp-lightbox.show{display:flex;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+  .bp-lightbox .bp-stage{
+    position:relative;
+    width:100%;max-width:520px;
+    max-height:90vh;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .bp-lightbox img{
+    width:100%;height:auto;max-height:84vh;
+    object-fit:contain;
+    border-radius:6px;
+  }
+  .bp-lightbox .bp-close{
+    position:absolute;top:-44px;right:0;
+    width:36px;height:36px;border-radius:50%;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.2);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+  }
+  .bp-lightbox .bp-nav{
+    position:absolute;top:50%;transform:translateY(-50%);
+    width:42px;height:42px;border-radius:50%;
+    background:rgba(0,0,0,.55);
+    border:1px solid rgba(255,255,255,.18);
+    color:#fff;
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .bp-lightbox .bp-prev{left:-6px;}
+  .bp-lightbox .bp-next{right:-6px;}
+  .bp-lightbox .bp-counter{
+    position:absolute;bottom:-34px;left:50%;transform:translateX(-50%);
+    font-family:'Inter',sans-serif;
+    font-size:11px;letter-spacing:.16em;
+    color:rgba(255,255,255,.7);
+    text-transform:uppercase;
+  }
+
+  /* ===== Brand stripe ===== */
+  .stripe-row{
+    display:flex;justify-content:center;
+    padding:14px 0 8px;
+  }
+  .stripe{
+    display:inline-flex;gap:3px;height:7px;
+    transform:skewX(-18deg);
+  }
+  .stripe span{width:14px;height:100%;border-radius:1px;}
+  .stripe span:nth-child(1){background:var(--c-red);}
+  .stripe span:nth-child(2){background:var(--c-orange);}
+  .stripe span:nth-child(3){background:var(--c-yellow);}
+  .stripe span:nth-child(4){background:var(--c-green);}
+  .stripe span:nth-child(5){background:var(--c-blue);}
+  .stripe span:nth-child(6){background:var(--c-purple);}
+
+  /* ===== Category pills ===== */
+  .catnav-wrap{
+    position:sticky;
+    top: var(--catnav-top, 60px);
+    z-index:20;
+    background:rgba(10,8,7,.94);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .catnav{
+    display:flex;gap:6px;
+    padding:10px 14px;
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .catnav::-webkit-scrollbar{display:none;}
+  .catnav button{
+    flex:0 0 auto;
+    background:transparent;
+    border:1px solid var(--line);
+    color:var(--ink-2);
+    padding:8px 14px;
+    border-radius:999px;
+    font-family:'Inter','Noto Sans KR',sans-serif;
+    font-size:12.5px;
+    font-weight:600;
+    letter-spacing:.03em;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:all .15s ease;
+    display:flex;align-items:center;gap:6px;
+  }
+  .catnav button .ko{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:700;
+    font-size:11px;
+    color:var(--ink-3);
+  }
+  .catnav button.active{
+    color:var(--bg-0);
+    background:var(--gold);
+    border-color:var(--gold);
+  }
+  .catnav button.active .ko{ color:rgba(20,16,14,.7); }
+
+  /* ===== Menu pages (image-only) ===== */
+  .pages{
+    padding:8px 14px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .page{
+    position:relative;
+    border-radius:14px;
+    overflow:visible;
+    background:#000;
+    border:1px solid var(--line);
+    scroll-margin-top:130px;
+    box-shadow:0 6px 28px rgba(0,0,0,.45);
+    padding-top:38px;
+    margin-top:6px;
+  }
+  .page img{
+    border-radius:13px;
+    position:relative;
+    z-index:0;
+  }
+  .page img{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+  .page-tag{
+    position:absolute;
+    top:0;left:10px;
+    padding:5px 12px;
+    border-radius:6px;
+    background:rgba(20,16,14,.95);
+    border:1px solid rgba(233,184,101,.25);
+    font-family:'Bebas Neue',sans-serif;
+    font-size:13px;
+    letter-spacing:.18em;
+    color:var(--gold);
+    z-index:2;
+    box-shadow:0 4px 12px rgba(0,0,0,.5);
+  }
+  .page-tag .ko{
+    font-family:'Noto Sans KR',sans-serif;
+    font-weight:700;
+    font-size:9.5px;
+    letter-spacing:.18em;
+    color:var(--ink-3);
+    margin-left:6px;
+  }
+
+  /* Page count footer-ish */
+  .pages-footer{
+    text-align:center;
+    padding:18px 0 8px;
+    color:var(--ink-4);
+    font-size:11px;
+    letter-spacing:.2em;
+    text-transform:uppercase;
+  }
+  .pages-footer .stripe-row{ padding:0 0 10px; }
+
+  /* ===== Reviews ===== */
+  .reviews{
+    padding:24px 18px 28px;
+    background:var(--bg-1);
+    border-top:1px solid var(--line);
+    margin-top:6px;
+  }
+  .review-head .top{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:10px;
+  }
+  .gmaps-logo{width:22px;height:22px;}
+  .review-head h2{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:30px;
+    margin:0;
+    color:var(--ink);
+  }
+  .rating-summary{
+    display:flex;align-items:center;gap:14px;
+    padding:14px;
+    background:rgba(0,0,0,.4);
+    border:1px solid var(--line);
+    border-radius:14px;
+    margin-bottom:14px;
+  }
+  .rating-num{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:48px;line-height:1;
+    color:var(--gold);
+  }
+  .rating-stars{ color:var(--gold); font-size:15px; margin-bottom:3px; letter-spacing:1px; }
+  .rating-count{ font-size:11.5px; color:var(--ink-3); }
+  .rating-count strong{ color:var(--ink); font-weight:600; }
+  .gmaps-link{
+    margin-top:6px;
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:11px;color:#4ea1ff;text-decoration:none;font-weight:600;
+  }
+
+  .reviews-list{display:flex;flex-direction:column;gap:12px;}
+  .review-card{
+    padding:14px;
+    background:rgba(0,0,0,.35);
+    border:1px solid var(--line);
+    border-radius:12px;
+  }
+  .review-top{display:flex;align-items:center;gap:10px;margin-bottom:6px;}
+  .avatar{
+    width:34px;height:34px;border-radius:50%;
+    display:grid;place-items:center;
+    color:#fff;font-weight:700;font-size:13px;
+    flex:0 0 auto;
+  }
+  .reviewer-name{ font-size:13px;color:var(--ink);font-weight:600; }
+  .review-when{ font-size:10.5px;color:var(--ink-3);margin-top:1px; }
+  .review-stars{color:var(--gold);font-size:11px;letter-spacing:1px;margin-bottom:6px;}
+  .review-text{ font-size:12.5px;line-height:1.55;color:var(--ink-2); }
+  .lang-tag{
+    display:inline-block;
+    font-size:9px;letter-spacing:.18em;color:var(--ink-4);
+    border:1px solid var(--line);
+    padding:1px 5px;border-radius:3px;
+    margin-right:6px;text-transform:uppercase;
+    vertical-align:middle;
+  }
+
+  /* ===== Fixed bottom action bar ===== */
+  .bottombar{
+    position:fixed;
+    bottom:0;left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    max-width:440px;
+    z-index:50;
+    background:rgba(10,8,7,.96);
+    backdrop-filter:blur(18px) saturate(140%);
+    border-top:1px solid var(--line);
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:8px;
+  }
+  .bottombar .item{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+    padding:8px 6px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:rgba(255,255,255,.03);
+    color:var(--ink);
+    text-decoration:none;
+    cursor:pointer;
+    transition:all .15s ease;
+  }
+  .bottombar .item:active{ background:rgba(255,255,255,.08); transform:translateY(1px); }
+  .bottombar .item .icon{
+    width:22px;height:22px;
+    display:grid;place-items:center;
+    color:var(--gold);
+  }
+  .bottombar .item .icon svg{ width:18px;height:18px; }
+  .bottombar .item .label{
+    font-size:10.5px;
+    font-weight:600;
+    letter-spacing:.06em;
+    color:var(--ink);
+  }
+  .bottombar .item .sub{
+    font-size:9.5px;
+    color:var(--ink-3);
+    letter-spacing:.04em;
+  }
+  .bottombar .item.primary{
+    background:linear-gradient(180deg,rgba(233,184,101,.16),rgba(233,184,101,.06));
+    border-color:rgba(233,184,101,.4);
+  }
+  .bottombar .item.primary .icon{ color:var(--gold); }
+
+  .bottombar .item.state-open .icon{ color:#7ed957; }
+  .bottombar .item.state-closing .icon{ color:var(--gold); }
+  .bottombar .item.state-opening .icon{ color:#7fc4ee; }
+  .bottombar .item.state-closed .icon{ color:#ee9988; }
+
+  /* ===== Hours bottom-sheet ===== */
+  .scrim{
+    position:fixed;inset:0;
+    background:rgba(0,0,0,.7);
+    backdrop-filter:blur(4px);
+    z-index:60;
+    opacity:0;pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .scrim.open{ opacity:1;pointer-events:auto; }
+
+  .sheet{
+    position:fixed;
+    left:50%;
+    transform:translateX(-50%) translateY(100%);
+    bottom:0;
+    width:100%;
+    max-width:440px;
+    z-index:61;
+    background:var(--bg-1);
+    border-top-left-radius:24px;
+    border-top-right-radius:24px;
+    border:1px solid var(--line);
+    border-bottom:none;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1);
+    max-height:80vh;
+    overflow-y:auto;
+  }
+  .sheet.open{ transform:translateX(-50%) translateY(0); }
+  .sheet .grab{
+    width:40px;height:4px;
+    background:rgba(255,255,255,.18);
+    border-radius:2px;
+    margin:10px auto 0;
+  }
+  .sheet .body{ padding:18px 22px 28px; }
+  .sheet h3{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:30px;
+    margin:6px 0 0;
+    color:var(--ink);
+  }
+  .sheet .ko-sub{
+    font-family:'Noto Sans KR',sans-serif;
+    font-size:11.5px;
+    letter-spacing:.25em;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  .hours-card{
+    margin-top:8px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+  }
+  .hours-row{
+    display:flex;align-items:center;
+    padding:14px 16px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .hours-row:last-child{ border-bottom:none; }
+  .hours-row.today{ background:rgba(233,184,101,.06); }
+  .hours-row .day{
+    flex:1;
+    font-size:13px;
+    color:var(--ink-2);
+    font-weight:500;
+    display:flex;align-items:center;gap:8px;
+  }
+  .hours-row.today .day{ color:var(--ink); font-weight:700; }
+  .today-pill{
+    display:inline-block;
+    font-size:9px;font-weight:700;letter-spacing:.18em;
+    color:var(--premium-ink);
+    background:var(--gold);
+    padding:2px 6px;border-radius:3px;
+  }
+  .hours-row .time{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:17px;
+    letter-spacing:.06em;
+    color:var(--ink);
+  }
+
+  /* live status block */
+  .live-status{
+    margin-top:6px;
+    padding:16px;
+    border-radius:14px;
+    border:1px solid var(--line);
+    display:flex; align-items:center; gap:14px;
+    position:relative;
+    overflow:hidden;
+  }
+  .live-status .ls-dot{
+    width:12px;height:12px;border-radius:50%;
+    flex:0 0 auto;
+    position:relative;
+  }
+  .live-status .ls-dot::after{
+    content:'';
+    position:absolute; inset:-6px;
+    border-radius:50%;
+    border:2px solid currentColor;
+    opacity:0;
+    animation:lsPulse 2s ease-out infinite;
+  }
+  @keyframes lsPulse{
+    0%{ transform:scale(.6); opacity:.7; }
+    100%{ transform:scale(1.6); opacity:0; }
+  }
+  .live-status .ls-text{ flex:1; min-width:0; }
+  .live-status .ls-headline{
+    font-family:'Inter',sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.02em;
+    line-height:1.2;
+  }
+  .live-status .ls-detail{
+    font-size:12px;
+    color:var(--ink-3);
+    margin-top:3px;
+  }
+  .live-status .ls-time{
+    font-family:'Bebas Neue',sans-serif;
+    font-size:18px;
+    letter-spacing:.05em;
+    color:var(--ink-2);
+    text-align:right;
+  }
+  .live-status .ls-time .lbl{
+    display:block;
+    font-family:'Inter',sans-serif;
+    font-size:9px;
+    letter-spacing:.18em;
+    color:var(--ink-4);
+    font-weight:700;
+    margin-bottom:1px;
+  }
+
+  .live-status.s-open{
+    background:linear-gradient(180deg,rgba(126,217,87,.10),rgba(126,217,87,.02));
+    border-color:rgba(126,217,87,.30);
+    color:#7ed957;
+  }
+  .live-status.s-open .ls-dot{ background:#7ed957; box-shadow:0 0 10px #7ed957; }
+  .live-status.s-open .ls-headline{ color:#a6e889; }
+
+  .live-status.s-closing{
+    background:linear-gradient(180deg,rgba(233,184,101,.12),rgba(233,184,101,.02));
+    border-color:rgba(233,184,101,.35);
+    color:var(--gold);
+  }
+  .live-status.s-closing .ls-dot{ background:var(--gold); box-shadow:0 0 10px var(--gold); }
+  .live-status.s-closing .ls-headline{ color:#f5cf86; }
+
+  .live-status.s-opening{
+    background:linear-gradient(180deg,rgba(58,161,230,.10),rgba(58,161,230,.02));
+    border-color:rgba(58,161,230,.30);
+    color:#5fb6ee;
+  }
+  .live-status.s-opening .ls-dot{ background:#5fb6ee; box-shadow:0 0 10px #5fb6ee; }
+  .live-status.s-opening .ls-headline{ color:#9bd0f3; }
+
+  .live-status.s-closed{
+    background:linear-gradient(180deg,rgba(228,75,58,.08),rgba(228,75,58,.02));
+    border-color:rgba(228,75,58,.30);
+    color:#e07a6a;
+  }
+  .live-status.s-closed .ls-dot{ background:#e07a6a; box-shadow:0 0 10px #e07a6a; animation:none; }
+  .live-status.s-closed .ls-dot::after{ animation:none; }
+  .live-status.s-closed .ls-headline{ color:#ee9988; }
+  .sheet-close{
+    position:absolute;top:14px;right:14px;
+    width:32px;height:32px;
+    background:rgba(0,0,0,.4);
+    border:1px solid var(--line);
+    border-radius:50%;
+    color:var(--ink);
+    display:grid;place-items:center;
+    cursor:pointer;
+  }
+  .info-grid{
+    margin-top:14px;
+    display:grid;
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  .info-grid .row{
+    display:flex;align-items:center;gap:12px;
+    padding:12px 14px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    color:var(--ink);
+    text-decoration:none;
+  }
+  .info-grid .row .ic{
+    width:28px;height:28px;
+    color:var(--gold);
+    display:grid;place-items:center;
+    flex:0 0 auto;
+  }
+  .info-grid .row .lbl{ font-size:10px;letter-spacing:.18em;color:var(--ink-3);text-transform:uppercase; }
+  .info-grid .row .val{ font-size:13px;color:var(--ink);margin-top:1px; }
+</style>
+</head>
+<body>
+  <div class="device" id="device">
+
+    <!-- ===== Top bar ===== -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="ko">종로화로</span>
+        <span class="en">JONGROHWARO BBQ</span>
+      </div>
+      <span class="open-pill" id="openPill"><span class="dot"></span><span id="openLabel">OPEN</span></span>
+    </header>
+
+    <!-- ===== Banchan promo (signature feature) ===== -->
+    <section class="banchan-promo" aria-label="한국 정통 반찬 15종">
+      <div class="bp-eyebrow">Our Signature Pride</div>
+      <p class="bp-headline">Unlike any Korean BBQ in Sydney</p>
+      <p class="bp-sub"><span class="num">15</span> traditional Korean banchan — <span class="unlimited">unlimited refills</span></p>
+      <div class="bp-thumbs" id="bpThumbs">
+        <button class="bp-thumb" data-idx="0" aria-label="반찬 사진 1">
+          <img src="images/banchan-hero-1.jpg" alt="반찬 진열" loading="lazy" />
+          <span class="bp-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg></span>
+        </button>
+        <button class="bp-thumb" data-idx="1" aria-label="반찬 사진 2">
+          <img src="images/banchan-hero-2.jpg" alt="반찬 플레이팅" loading="lazy" />
+          <span class="bp-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg></span>
+        </button>
+        <button class="bp-thumb" data-idx="2" aria-label="반찬 사진 3">
+          <img src="images/banchan-hero-3.jpg" alt="테이블 세팅" loading="lazy" />
+          <span class="bp-zoom"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ===== Banchan promo lightbox ===== -->
+    <div class="bp-lightbox" id="bpLightbox" role="dialog" aria-modal="true">
+      <div class="bp-stage">
+        <button class="bp-close" id="bpClose" aria-label="닫기">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <button class="bp-nav bp-prev" id="bpPrev" aria-label="이전">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 6l-6 6 6 6"/></svg>
+        </button>
+        <img id="bpImg" src="" alt="" />
+        <button class="bp-nav bp-next" id="bpNext" aria-label="다음">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="bp-counter" id="bpCounter">1 / 3</div>
+      </div>
+    </div>
+
+    <!-- ===== Sticky category pills ===== -->
+    <nav class="catnav-wrap">
+      <div class="catnav" id="catnav">
+        <button class="active" data-target="page-set-pork">BBQ Set <span class="ko">세트·돼지</span></button>
+        <button data-target="page-wagyu">Wagyu Set <span class="ko">와규 세트</span></button>
+        <button data-target="page-bbq">BBQ <span class="ko">바비큐</span></button>
+        <button data-target="page-beef">Beef <span class="ko">소고기</span></button>
+        <button data-target="page-meal">Meal <span class="ko">식사</span></button>
+        <button data-target="page-special">Special <span class="ko">스페셜</span></button>
+        <button data-target="reviews-sec">Reviews <span class="ko">리뷰</span></button>
+      </div>
+    </nav>
+
+    <!-- ===== Menu pages — image only ===== -->
+    <main class="pages">
+      <div class="page" id="page-set-pork">
+        <img src="images/menu_bbqset_pork.jpg" alt="BBQ Set & Pork menu" />
+        <div class="page-tag">BBQ Set & Pork <span class="ko">세트·돼지</span></div>
+      </div>
+      <div class="page" id="page-wagyu">
+        <img src="images/menu_wagyu.jpg" alt="Wagyu Set menu" />
+        <div class="page-tag">Wagyu Set <span class="ko">와규 세트</span></div>
+      </div>
+      <div class="page" id="page-bbq">
+        <img src="images/menu_bbq.jpg" alt="BBQ menu" />
+        <div class="page-tag">BBQ <span class="ko">바비큐</span></div>
+      </div>
+      <div class="page" id="page-beef">
+        <img src="images/menu_beef.jpg" alt="Beef menu" />
+        <div class="page-tag">Beef <span class="ko">소고기</span></div>
+      </div>
+      <div class="page" id="page-meal">
+        <img src="images/menu_meal.jpg" alt="Meal menu" />
+        <div class="page-tag">Meal <span class="ko">식사</span></div>
+      </div>
+      <div class="page" id="page-special">
+        <img src="images/menu_special.jpg" alt="Special menu" />
+        <div class="page-tag">Special <span class="ko">스페셜</span></div>
+      </div>
+    </main>
+
+    <div class="pages-footer">
+      <div class="stripe-row"><span class="stripe"><span></span><span></span><span></span><span></span><span></span><span></span></span></div>
+      종 로 화 로 · JONGROHWARO BBQ
+    </div>
+
+    <!-- ===== Reviews ===== -->
+    <section class="reviews" id="reviews-sec">
+      <div class="review-head">
+        <div class="top">
+          <svg class="gmaps-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.5 9c0 5-7.5 13-7.5 13S4.5 14 4.5 9a7.5 7.5 0 1115 0z" fill="#EA4335"/>
+            <circle cx="12" cy="9" r="2.8" fill="#fff"/>
+          </svg>
+          <h2>What guests say</h2>
+        </div>
+        <div class="rating-summary">
+          <div class="rating-num">4.9</div>
+          <div style="flex:1">
+            <div class="rating-stars">★ ★ ★ ★ ★</div>
+            <div class="rating-count">Based on <strong>1,247</strong> Google reviews</div>
+            <a class="gmaps-link" href="https://maps.app.goo.gl/Fp6sVWnEuDfjoWJj9" target="_blank" rel="noopener">
+              View on Google Maps
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M9 7h8v8"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-list" id="reviewsList"></div>
+    </section>
+
+  </div>
+
+  <!-- ===== Fixed bottom bar ===== -->
+  <nav class="bottombar">
+    <button class="item" id="hoursBtn">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </span>
+      <span class="label" id="hoursLabel">Opening Hours</span>
+      <span class="sub" id="hoursSub">5PM–10PM</span>
+    </button>
+    <a class="item primary" href="https://maps.app.goo.gl/Fp6sVWnEuDfjoWJj9" target="_blank" rel="noopener">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7 7-13a7 7 0 1 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      </span>
+      <span class="label">Map</span>
+      <span class="sub">Directions</span>
+    </a>
+    <a class="item" href="tel:+61287460299">
+      <span class="icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.7 12.7 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.7 12.7 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </span>
+      <span class="label">Call</span>
+      <span class="sub">02 8746 0299</span>
+    </a>
+  </nav>
+
+  <!-- ===== Hours sheet ===== -->
+  <div class="scrim" id="scrim"></div>
+  <div class="sheet" id="sheet">
+    <div class="grab"></div>
+    <button class="sheet-close" id="sheetClose" aria-label="Close">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="body">
+      <h3>Opening Hours</h3>
+      <div class="ko-sub">영 업 시 간</div>
+
+      <div id="liveStatus" class="live-status"></div>
+
+      <div class="hours-card" id="hoursCard"></div>
+
+      <div class="info-grid">
+        <a class="row" href="https://maps.app.goo.gl/Fp6sVWnEuDfjoWJj9" target="_blank" rel="noopener">
+          <span class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s7-7 7-13a7 7 0 1 0-14 0c0 6 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>
+          </span>
+          <span style="flex:1">
+            <span class="lbl">Address</span>
+            <span class="val">Open in Google Maps</span>
+          </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink-3)"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+        <a class="row" href="tel:+61287460299">
+          <span class="ic">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.86 19.86 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.86 19.86 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.7 12.7 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.7 12.7 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </span>
+          <span style="flex:1">
+            <span class="lbl">Reservation</span>
+            <span class="val">+61 2 8746 0299</span>
+          </span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink-3)"><path d="M9 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+<script>
+(function(){
+  // ===== Reviews data =====
+  const reviews = [
+    { name:'Daniel K.', initials:'DK', color:'#e44b3a', stars:5, when:'2 weeks ago', lang:'EN',
+      text:"Some of the best Korean BBQ I've had outside of Seoul. The marbled short ribs were unreal — perfectly portioned, and the charcoal grill makes a huge difference. Eight banchan refilled without asking." },
+    { name:'김수진', initials:'김', color:'#3aa1e6', stars:5, when:'1 month ago', lang:'KO',
+      text:"오랜만에 한국 같은 분위기의 진짜 화로구이를 먹었어요. 고기 질이 정말 좋고, 양념도 자극적이지 않아서 좋았어요. 반찬이 8가지나 나오는데 다 맛있었습니다." },
+    { name:'Marcus L.', initials:'ML', color:'#6cba47', stars:5, when:'3 weeks ago', lang:'EN',
+      text:"Came here for our anniversary. The wagyu set was tableside-grilled and they explained each cut. Soft tofu stew was a highlight. Pricey but worth it." },
+    { name:'박민호', initials:'박', color:'#f08a2c', stars:5, when:'5 days ago', lang:'KO',
+      text:"치마살주물럭이 정말 인상적이었어요. 마블링이 좋고, 화로 위에서 굽는 향이 일품. 김치찌개도 진짜 한국 맛입니다." },
+    { name:'Aisha P.', initials:'AP', color:'#efc63a', stars:5, when:'6 weeks ago', lang:'EN',
+      text:"Group of 6 — Wagyu Family Set + seafood pancake. Server was generous with banchan refills. The volcano steamed egg is theatrical and delicious." }
+  ];
+  document.getElementById('reviewsList').innerHTML = reviews.map(r => `
+    <div class="review-card">
+      <div class="review-top">
+        <div class="avatar" style="background:${r.color}">${r.initials}</div>
+        <div style="flex:1;min-width:0">
+          <div class="reviewer-name">${r.name}</div>
+          <div class="review-when">${r.when} · Local Guide</div>
+        </div>
+      </div>
+      <div class="review-stars">${'★'.repeat(r.stars)}${'☆'.repeat(5-r.stars)}</div>
+      <div class="review-text"><span class="lang-tag">${r.lang}</span>${r.text}</div>
+    </div>
+  `).join('');
+
+  // ===== Hours table =====
+  // JS getDay(): Sun=0, Mon=1, Tue=2, Wed=3, Thu=4, Fri=5, Sat=6
+  const schedule = [
+    { day:'Tuesday',   ko:'화요일', time:'5:00 PM – 10:00 PM',  short:'5PM–10PM',  dayIdx:2 },
+    { day:'Wednesday', ko:'수요일', time:'5:00 PM – 10:00 PM',  short:'5PM–10PM',  dayIdx:3 },
+    { day:'Thursday',  ko:'목요일', time:'5:00 PM – 10:00 PM',  short:'5PM–10PM',  dayIdx:4 },
+    { day:'Friday',    ko:'금요일', time:'5:00 PM – 11:00 PM',  short:'5PM–11PM',  dayIdx:5 },
+    { day:'Saturday',  ko:'토요일', time:'12:00 PM – 11:00 PM', short:'12PM–11PM', dayIdx:6 },
+    { day:'Sunday',    ko:'일요일', time:'12:00 PM – 10:00 PM', short:'12PM–10PM', dayIdx:0 },
+    { day:'Monday',    ko:'월요일', time:'5:00 PM – 10:00 PM',  short:'5PM–10PM',  dayIdx:1 }
+  ];
+  const todayIdx = new Date().getDay();
+  document.getElementById('hoursCard').innerHTML = schedule.map(s => `
+    <div class="hours-row ${s.dayIdx === todayIdx ? 'today' : ''}">
+      <div class="day">
+        ${s.day} <span style="color:var(--ink-3);font-size:11px;font-weight:400;margin-left:2px">${s.ko}</span>
+        ${s.dayIdx === todayIdx ? '<span class="today-pill">TODAY</span>' : ''}
+      </div>
+      <div class="time">${s.time}</div>
+    </div>
+  `).join('');
+
+  // ===== Live open/closed status =====
+  // Hours by JS day (Sun=0..Sat=6) — [openHour, closeHour] in 24h
+  const hoursByDay = {
+    0: [12, 22], 1: [17, 22], 2: [17, 22], 3: [17, 22],
+    4: [17, 22], 5: [17, 23], 6: [12, 23]
+  };
+  const dayShort = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const dayKo = ['일','월','화','수','목','금','토'];
+
+  function fmt12(h){
+    // h can be fractional; format like 5:00 PM
+    const hr = Math.floor(h);
+    const min = Math.round((h - hr) * 60);
+    const ampm = hr >= 12 ? 'PM' : 'AM';
+    const hh = hr % 12 === 0 ? 12 : hr % 12;
+    return min === 0 ? `${hh}${ampm}` : `${hh}:${String(min).padStart(2,'0')}${ampm}`;
+  }
+  function fmtCompact(openH, closeH){
+    return `${fmt12(openH)}–${fmt12(closeH)}`;
+  }
+
+  function computeStatus(){
+    const now = new Date();
+    const dow = now.getDay();
+    const h = now.getHours() + now.getMinutes()/60;
+    const [openH, closeH] = hoursByDay[dow];
+    const todayCompact = fmtCompact(openH, closeH);
+
+    if (h >= openH && h < closeH) {
+      const minsToClose = Math.round((closeH - h) * 60);
+      if (minsToClose <= 60) {
+        return {
+          state: 'closing',
+          headline: 'Closing soon',
+          detail: `Closes in ${minsToClose} min · today ${todayCompact}`,
+          timeLabel: 'CLOSES',
+          timeValue: fmt12(closeH),
+          pillText: `OPEN · ‘TIL ${fmt12(closeH)}`,
+          pillCls: 'closed'
+        };
+      }
+      return {
+        state: 'open',
+        headline: 'Open now',
+        detail: `Today ${dayShort[dow]} · ${todayCompact}`,
+        timeLabel: 'CLOSES',
+        timeValue: fmt12(closeH),
+        pillText: `OPEN · ${todayCompact}`,
+        pillCls: ''
+      };
+    }
+
+    // Closed — find next opening
+    if (h < openH) {
+      const minsToOpen = Math.round((openH - h) * 60);
+      if (minsToOpen <= 90) {
+        return {
+          state: 'opening',
+          headline: 'Opening soon',
+          detail: `Opens in ${minsToOpen} min · today ${todayCompact}`,
+          timeLabel: 'OPENS',
+          timeValue: fmt12(openH),
+          pillText: `CLOSED · OPEN ${fmt12(openH)} TODAY`,
+          pillCls: 'closed'
+        };
+      }
+      return {
+        state: 'closed',
+        headline: 'Closed',
+        detail: `Opens today at ${fmt12(openH)}`,
+        timeLabel: 'OPENS',
+        timeValue: fmt12(openH),
+        pillText: `CLOSED · OPEN ${fmt12(openH)} TODAY`,
+        pillCls: 'closed'
+      };
+    }
+    // After today's close — find next day's opening
+    let nextDow = (dow + 1) % 7;
+    let daysAhead = 1;
+    while (daysAhead < 8) {
+      if (hoursByDay[nextDow]) break;
+      nextDow = (nextDow + 1) % 7;
+      daysAhead++;
+    }
+    const [nOpenH] = hoursByDay[nextDow];
+    const nLabel = daysAhead === 1 ? 'tomorrow' : dayShort[nextDow];
+    return {
+      state: 'closed',
+      headline: 'Closed',
+      detail: `Opens ${nLabel} at ${fmt12(nOpenH)}`,
+      timeLabel: 'OPENS',
+      timeValue: fmt12(nOpenH),
+      pillText: daysAhead === 1
+        ? `CLOSED · OPEN ${fmt12(nOpenH)} TOMORROW`
+        : `CLOSED · OPEN ${fmt12(nOpenH)} ${dayShort[nextDow].toUpperCase()}`,
+      pillCls: 'closed'
+    };
+  }
+
+  function applyStatus(){
+    const s = computeStatus();
+    // Top pill
+    const pill = document.getElementById('openPill');
+    const pillLabel = document.getElementById('openLabel');
+    pill.classList.remove('state-open','state-closing','state-opening','state-closed');
+    pill.classList.add('state-' + s.state);
+    pillLabel.textContent = s.pillText;
+
+    // bottom-bar Hours sub
+    const dow = new Date().getDay();
+    const [oH, cH] = hoursByDay[dow];
+    document.getElementById('hoursSub').textContent =
+      `${dayShort[dow]} · ${fmtCompact(oH, cH)}`;
+
+    // Color the Hours label based on state
+    const hoursBtn = document.getElementById('hoursBtn');
+    if (hoursBtn) {
+      hoursBtn.classList.remove('state-open','state-closing','state-opening','state-closed');
+      hoursBtn.classList.add('state-' + s.state);
+    }
+
+    // Live status card in sheet
+    const ls = document.getElementById('liveStatus');
+    if (ls) {
+      ls.className = 'live-status s-' + s.state;
+      ls.innerHTML = `
+        <span class="ls-dot"></span>
+        <div class="ls-text">
+          <div class="ls-headline">${s.headline}</div>
+          <div class="ls-detail">${s.detail}</div>
+        </div>
+        <div class="ls-time">
+          <span class="lbl">${s.timeLabel}</span>${s.timeValue}
+        </div>
+      `;
+    }
+  }
+  applyStatus();
+  setInterval(applyStatus, 30000);
+
+  /* ===== Stack catnav under status banner ===== */
+  function syncCatnavOffset(){
+    const tb = document.querySelector('.topbar');
+    const tbH = tb ? tb.getBoundingClientRect().height : 60;
+    document.documentElement.style.setProperty('--catnav-top', tbH + 'px');
+  }
+  syncCatnavOffset();
+  window.addEventListener('resize', syncCatnavOffset);
+  // Re-measure after fonts load (banner can grow when text wraps)
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(syncCatnavOffset);
+
+  /* ===== Banchan promo lightbox ===== */
+  (function(){
+    const imgs = [
+      'images/banchan-hero-1.jpg',
+      'images/banchan-hero-2.jpg',
+      'images/banchan-hero-3.jpg'
+    ];
+    const lb = document.getElementById('bpLightbox');
+    const img = document.getElementById('bpImg');
+    const counter = document.getElementById('bpCounter');
+    let idx = 0;
+
+    function show(i){
+      idx = (i + imgs.length) % imgs.length;
+      img.src = imgs[idx];
+      counter.textContent = (idx+1) + ' / ' + imgs.length;
+      lb.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+    function hide(){
+      lb.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('#bpThumbs .bp-thumb').forEach(t => {
+      t.addEventListener('click', () => show(parseInt(t.dataset.idx,10)));
+    });
+    document.getElementById('bpClose').addEventListener('click', hide);
+    document.getElementById('bpPrev').addEventListener('click', e => { e.stopPropagation(); show(idx-1); });
+    document.getElementById('bpNext').addEventListener('click', e => { e.stopPropagation(); show(idx+1); });
+    lb.addEventListener('click', e => { if (e.target === lb) hide(); });
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('show')) return;
+      if (e.key === 'Escape') hide();
+      else if (e.key === 'ArrowLeft') show(idx-1);
+      else if (e.key === 'ArrowRight') show(idx+1);
+    });
+  })();
+
+  // ===== Sticky nav: click + scroll-spy =====
+  const catnav = document.getElementById('catnav');
+  const buttons = [...catnav.querySelectorAll('button')];
+  const ids = buttons.map(b => b.dataset.target);
+
+  function getScrollContainer(){
+    const dev = document.getElementById('device');
+    if (dev && dev.scrollHeight > dev.clientHeight + 4) return dev;
+    return null; // window
+  }
+
+  buttons.forEach(b => {
+    b.addEventListener('click', () => {
+      const tgt = document.getElementById(b.dataset.target);
+      if (!tgt) return;
+      const container = getScrollContainer();
+      const offset = 120;
+      if (container) {
+        const top = tgt.getBoundingClientRect().top + container.scrollTop - container.getBoundingClientRect().top - offset;
+        container.scrollTo({ top, behavior:'smooth' });
+      } else {
+        const top = tgt.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior:'smooth' });
+      }
+    });
+  });
+
+  function setActive(id){
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+    const active = buttons.find(b => b.dataset.target === id);
+    if (active) {
+      const navRect = catnav.getBoundingClientRect();
+      const btnRect = active.getBoundingClientRect();
+      if (btnRect.left < navRect.left + 20 || btnRect.right > navRect.right - 20) {
+        catnav.scrollTo({ left: active.offsetLeft - 60, behavior:'smooth' });
+      }
+    }
+  }
+
+  function onScroll(){
+    let current = ids[0];
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      const r = el.getBoundingClientRect();
+      if (r.top <= 160) current = id;
+    }
+    setActive(current);
+  }
+
+  setTimeout(() => {
+    const container = getScrollContainer();
+    if (container) container.addEventListener('scroll', onScroll, { passive:true });
+    else window.addEventListener('scroll', onScroll, { passive:true });
+    onScroll();
+  }, 100);
+
+  // ===== Hours sheet =====
+  const scrim = document.getElementById('scrim');
+  const sheet = document.getElementById('sheet');
+  document.getElementById('hoursBtn').addEventListener('click', () => {
+    scrim.classList.add('open'); sheet.classList.add('open');
+  });
+  document.getElementById('sheetClose').addEventListener('click', () => {
+    scrim.classList.remove('open'); sheet.classList.remove('open');
+  });
+  scrim.addEventListener('click', () => {
+    scrim.classList.remove('open'); sheet.classList.remove('open');
+  });
+})();
+</script>
+</body>
+</html>
