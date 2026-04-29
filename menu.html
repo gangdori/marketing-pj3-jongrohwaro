@@ -44,7 +44,7 @@
     min-height:100vh;
     background:var(--bg-0);
     position:relative;
-    overflow:hidden;
+    overflow:clip; /* clip prevents horizontal overflow without creating a scroll container — sticky works correctly */
     padding-bottom:84px; /* space for fixed bottom bar */
   }
   @media (min-width:720px){
@@ -60,25 +60,13 @@
       overflow-y:auto;
       overflow-x:hidden;
       scrollbar-width:thin;
-      padding-top:0;
-    }
-    .topbar{
-      position:sticky;
-      top:0;
-      left:auto;right:auto;
-      margin-left:0;
-      margin-right:0;
     }
   }
 
   /* ===== Top bar ===== */
   .topbar{
-    position:fixed;
+    position:sticky;
     top:0;
-    left:0;right:0;
-    max-width:440px;
-    margin-left:auto;
-    margin-right:auto;
     z-index:30;
     padding:14px 18px 12px;
     display:flex;
@@ -87,9 +75,6 @@
     background:rgba(10,8,7,.92);
     backdrop-filter:blur(14px);
     border-bottom:1px solid var(--line);
-  }
-  .device{
-    padding-top:var(--topbar-h,60px);
   }
   .brand{
     display:flex;flex-direction:column;gap:3px;line-height:1;
@@ -1231,7 +1216,6 @@
     const tb = document.querySelector('.topbar');
     const tbH = tb ? tb.getBoundingClientRect().height : 60;
     document.documentElement.style.setProperty('--catnav-top', tbH + 'px');
-    document.documentElement.style.setProperty('--topbar-h', tbH + 'px');
   }
   syncCatnavOffset();
   window.addEventListener('resize', syncCatnavOffset);
