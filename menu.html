@@ -232,13 +232,12 @@
     font-family:'Noto Serif KR',serif;
     font-weight:700;
     font-size:13.5px;
-    line-height:1.35;
+    line-height:1.6;
     color:var(--gold);
     letter-spacing:-.015em;
     margin:0 0 12px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space:normal;
+    overflow:visible;
   }
   .banchan-promo .bp-sub .num{
     color:#fff5dd;
@@ -248,50 +247,46 @@
   }
   .banchan-promo .bp-sub .unlimited{
     position:relative;
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
     font-style:italic;
-    font-weight:800;
-    background:linear-gradient(90deg,#ffe5a8 0%,#ffd166 25%,#fff7d6 50%,#ffd166 75%,#ffe5a8 100%);
-    background-size:200% 100%;
-    -webkit-background-clip:text;
-    background-clip:text;
-    -webkit-text-fill-color:transparent;
-    color:transparent;
-    animation:shimmerText 3.4s linear infinite;
-    padding:0 1px;
-    letter-spacing:.005em;
+    font-weight:900;
+    font-size:15.5px;
+    background:linear-gradient(135deg,#ffe082 0%,#ffd54f 40%,#ffca28 70%,#ffe082 100%);
+    background-size:200% 200%;
+    color:#1a0f00;
+    -webkit-text-fill-color:#1a0f00;
+    padding:4px 13px 4px 9px;
+    border-radius:999px;
+    letter-spacing:.01em;
+    vertical-align:middle;
+    box-shadow:0 0 16px rgba(255,209,102,.70), 0 0 36px rgba(255,209,102,.35), inset 0 1px 0 rgba(255,255,255,.35);
+    animation:unlimitedGlow 2s ease-in-out infinite alternate, shimmerBg 4s linear infinite;
+    margin-left:2px;
   }
   .banchan-promo .bp-sub .unlimited::before{
     content:'∞';
     display:inline-block;
-    margin-right:5px;
     font-style:normal;
-    -webkit-text-fill-color:#ffd166;
-    color:#ffd166;
-    text-shadow:0 0 10px rgba(255,209,102,.55);
-    transform:translateY(.5px);
+    font-weight:900;
+    font-size:1.2em;
+    color:#1a0f00;
+    -webkit-text-fill-color:#1a0f00;
+    text-shadow:none;
     animation:infinitySpin 2.6s ease-in-out infinite;
   }
-  .banchan-promo .bp-sub .unlimited::after{
-    content:'';
-    position:absolute;
-    left:-2px;right:-2px;bottom:-2px;
-    height:1.5px;
-    background:linear-gradient(90deg,transparent,#ffd166,transparent);
-    opacity:.7;
-    animation:underlineSweep 3.4s linear infinite;
-  }
-  @keyframes shimmerText{
-    0%{background-position:200% 0;}
-    100%{background-position:-200% 0;}
-  }
   @keyframes infinitySpin{
-    0%,100%{transform:translateY(.5px) rotate(0deg);}
-    50%{transform:translateY(.5px) rotate(180deg);}
+    0%,100%{transform:rotate(0deg);}
+    50%{transform:rotate(180deg);}
   }
-  @keyframes underlineSweep{
-    0%{transform:translateX(-100%);}
-    100%{transform:translateX(100%);}
+  @keyframes unlimitedGlow{
+    0%{box-shadow:0 0 10px rgba(255,209,102,.55), 0 0 24px rgba(255,209,102,.28), inset 0 1px 0 rgba(255,255,255,.35);}
+    100%{box-shadow:0 0 24px rgba(255,209,102,1), 0 0 48px rgba(255,209,102,.55), 0 0 72px rgba(255,184,0,.28), inset 0 1px 0 rgba(255,255,255,.35);}
+  }
+  @keyframes shimmerBg{
+    0%{background-position:0% 50%;}
+    100%{background-position:200% 50%;}
   }
   .banchan-promo .bp-thumbs{
     display:grid;
@@ -850,10 +845,10 @@
     </header>
 
     <!-- ===== Banchan promo (signature feature) ===== -->
-    <section class="banchan-promo" aria-label="한국 정통 반찬 15종">
+    <section class="banchan-promo" aria-label="한국 정통 반찬 12종">
       <div class="bp-eyebrow">Our Signature Pride</div>
       <p class="bp-headline">Unlike any Korean BBQ in Sydney</p>
-      <p class="bp-sub"><span class="num">15</span> traditional Korean banchan — <span class="unlimited">unlimited refills</span></p>
+      <p class="bp-sub"><span class="num">12</span> traditional Korean banchan &nbsp;<span class="unlimited">unlimited refills</span></p>
       <div class="bp-thumbs" id="bpThumbs">
         <button class="bp-thumb" data-idx="0" aria-label="반찬 사진 1">
           <img src="images/banchan-hero-1.jpg" alt="반찬 진열" loading="lazy" />
